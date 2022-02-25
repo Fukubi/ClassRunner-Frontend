@@ -3,7 +3,7 @@ export type Lecture = {
   creator_name: string;
   dc_server_link: string;
   description: string;
-  id: number;
+  id?: number;
   phone_number: string;
   wa_group_link: string;
 };

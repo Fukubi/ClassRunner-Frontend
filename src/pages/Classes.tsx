@@ -3,9 +3,17 @@ import styled from "styled-components";
 import { useQuery } from "react-query";
 import { LectureCard } from "../components/LectureCard";
 import { Lecture } from "../models/Lecture";
+import { Toolbar } from "../components/Toolbar";
 
 const Container = styled.div`
   padding: 20px 0px 20px 20px;
+
+  .lectures-list {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+  }
 `;
 
 export function Classes() {
@@ -28,13 +36,17 @@ export function Classes() {
 
   return (
     <Container>
-      {data ? (
-        data.map((lecture) => (
-          <LectureCard lecture={lecture} key={lecture.id} />
-        ))
-      ) : (
-        <p>We don't have any lectures registered</p>
-      )}
+      <Toolbar />
+
+      <div className="lectures-list">
+        {data ? (
+          data.map((lecture) => (
+            <LectureCard lecture={lecture} key={lecture.id} />
+          ))
+        ) : (
+          <p>We don't have any lectures registered</p>
+        )}
+      </div>
     </Container>
   );
 }

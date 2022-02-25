@@ -5,6 +5,7 @@ import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { Classes } from "./pages/Classes";
 import { About } from "./pages/About";
+import { NewLecture } from "./pages/NewLecture";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,8 @@ function App() {
           <Route path="/classes" element={<Classes />} />
 
           <Route path="/about" element={<About />} />
+
+          <Route path="/new-lecture" element={<NewLecture />} />
         </Routes>
       </QueryClientProvider>
     </BrowserRouter>

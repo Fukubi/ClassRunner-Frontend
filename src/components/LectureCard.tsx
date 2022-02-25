@@ -13,12 +13,14 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
 
-  width: 250px;
+  width: 300px;
   border: 0;
 
   padding-bottom: 15px;
 
   box-shadow: 5px 2px 15px #383838;
+
+  margin-right: 40px;
 
   .title {
     display: flex;
@@ -31,6 +33,7 @@ const Card = styled.div`
       color: #b8405e;
       padding: 0;
       margin: 0;
+      max-width: 200px;
     }
   }
 
