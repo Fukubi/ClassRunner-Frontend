@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { Classes } from "./pages/Classes";
 import { About } from "./pages/About";
 import { NewLecture } from "./pages/NewLecture";
+import { EditLecture } from "./pages/EditLecture";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,8 @@ function App() {
           <Route path="/about" element={<About />} />
 
           <Route path="/new-lecture" element={<NewLecture />} />
+
+          <Route path="/edit-lecture" element={<EditLecture />} />
         </Routes>
       </QueryClientProvider>
     </BrowserRouter>

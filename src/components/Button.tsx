@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Btn = styled.button`
-  width: 150px;
   height: 40px;
 
   background-color: #313552;
@@ -21,10 +20,10 @@ const Btn = styled.button`
 `;
 
 type ButtonProps = {
-  text: string;
+  children: React.ReactNode;
   handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function Button(props: ButtonProps) {
-  return <Btn onClick={props.handleClick}>{props.text}</Btn>;
+  return <Btn onClick={props.handleClick}>{props.children}</Btn>;
 }

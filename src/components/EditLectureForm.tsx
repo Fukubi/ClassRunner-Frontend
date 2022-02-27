@@ -1,11 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Lecture } from "../models/Lecture";
 
 import { Button } from "./Button";
 import { InputArea } from "./InputArea";
 import { InputText } from "./InputText";
+
+type EditLectureFormState = {
+  lecture: Lecture;
+};
 
 const Container = styled.form`
   display: flex;
@@ -34,7 +38,10 @@ const Container = styled.form`
   }
 `;
 
-export function NewLectureForm() {
+export function EditLectureForm() {
+  let { state } = useLocation();
+  const navigate = useNavigate();
+
   const [className, setClassName] = useState<string>("");
   const [creatorName, setCreatorName] = useState<string>("");
   const [dcServerLink, setDcServerLink] = useState<string>("");
@@ -42,12 +49,20 @@ export function NewLectureForm() {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [waGroupLink, setWaGroupLink] = useState<string>("");
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    setClassName((state as EditLectureFormState).lecture.class_name);
+    setCreatorName((state as EditLectureFormState).lecture.creator_name);
+    setDcServerLink((state as EditLectureFormState).lecture.dc_server_link);
+    setDescription((state as EditLectureFormState).lecture.description);
+    setPhoneNumber((state as EditLectureFormState).lecture.phone_number);
+    setWaGroupLink((state as EditLectureFormState).lecture.wa_group_link);
+  }, []);
 
-  function onSaveLecture(e: React.MouseEvent<HTMLButtonElement>) {
+  function onEditLecture(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     let lecture: Lecture = {
+      id: (state as EditLectureFormState).lecture.id,
       class_name: className,
       creator_name: creatorName,
       dc_server_link: dcServerLink,
@@ -57,7 +72,7 @@ export function NewLectureForm() {
     };
 
     fetch("http://localhost:5000/lectures", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -122,9 +137,7 @@ export function NewLectureForm() {
         />
       </div>
 
-      <Button handleClick={onSaveLecture}>
-        Save Lecture
-      </Button>
+      <Button handleClick={onEditLecture}>Save Lecture</Button>
     </Container>
   );
 }

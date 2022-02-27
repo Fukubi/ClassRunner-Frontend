@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
-  
+
   button {
     margin-right: 10px;
   }
@@ -18,12 +18,12 @@ export function Toolbar() {
   const navigate = useNavigate();
 
   function onClickNewLecture() {
-    navigate("/new-lecture")
+    navigate("/new-lecture");
   }
 
   return (
     <Container>
-      <Button text="New Lecture" handleClick={onClickNewLecture} />
+      <Button handleClick={onClickNewLecture}>New Lecture</Button>
     </Container>
   );
 }

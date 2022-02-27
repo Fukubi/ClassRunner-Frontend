@@ -54,7 +54,7 @@ export function Home() {
         </div>
       </ImagePhraseContainer>
 
-      <Button handleClick={onCheckClassesClick} text="Check Classes" />
+      <Button handleClick={onCheckClassesClick}>Check Classes</Button>
     </Container>
   );
 }

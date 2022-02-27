@@ -17,18 +17,24 @@ const Container = styled.div`
 `;
 
 export function Classes() {
-  const { isLoading, error, data } = useQuery<boolean, string, Lecture[]>(
-    "lecturesList",
-    () =>
-      fetch("http://localhost:5000/lectures", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((resp) => resp.json())
-        .catch((err) => err)
+  const { isLoading, error, data, refetch } = useQuery<
+    boolean,
+    string,
+    Lecture[]
+  >("lecturesList", () =>
+    fetch("http://localhost:5000/lectures", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .catch((err) => err)
   );
+
+  function updateList() {
+    refetch();
+  }
 
   if (isLoading) return <p>Loading lectures...</p>;
 
@@ -41,7 +47,11 @@ export function Classes() {
       <div className="lectures-list">
         {data ? (
           data.map((lecture) => (
-            <LectureCard lecture={lecture} key={lecture.id} />
+            <LectureCard
+              onDeletedHandle={updateList}
+              lecture={lecture}
+              key={lecture.id}
+            />
           ))
         ) : (
           <p>We don't have any lectures registered</p>
